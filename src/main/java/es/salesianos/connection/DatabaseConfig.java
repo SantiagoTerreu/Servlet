@@ -21,6 +21,7 @@ public class DatabaseConfig {
 	 * @return
 	 */
 	@Bean
+	@Profile(value = "h2")
 	public DriverManagerDataSource h2DataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.h2.Driver");
@@ -31,10 +32,11 @@ public class DatabaseConfig {
 	}
 	
 	@Bean
+	@Profile(value= "postgres")
 	public DriverManagerDataSource PostgresqlDataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
 		dataSource.setDriverClassName("org.postgresql.Driver");
-		dataSource.setUrl("jdbc:postgresql:file:./src/main/resources/test;INIT=RUNSCRIPT FROM 'classpath:scripts/create.sql'");
+		dataSource.setUrl("jdbc:postgresql:file:jdbc:postgresql://localhost:5432");
 		dataSource.setUsername("sa");
 		dataSource.setPassword("");
 		return dataSource;
