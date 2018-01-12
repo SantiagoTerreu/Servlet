@@ -29,5 +29,15 @@ public class DatabaseConfig {
 		dataSource.setPassword("");
 		return dataSource;
 	}
+	
+	@Bean
+	public DriverManagerDataSource PostgresqlDataSource() {
+		DriverManagerDataSource dataSource = new DriverManagerDataSource();
+		dataSource.setDriverClassName("org.postgresql.Driver");
+		dataSource.setUrl("jdbc:postgresql:file:./src/main/resources/test;INIT=RUNSCRIPT FROM 'classpath:scripts/create.sql'");
+		dataSource.setUsername("sa");
+		dataSource.setPassword("");
+		return dataSource;
+	}
 
 }
